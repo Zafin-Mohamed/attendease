@@ -1,3 +1,5 @@
+import Navbar from '../components/Navbar'
+
 function Calendar() {
   return (
     <div className="min-h-screen bg-gray-950 text-white px-4 py-6">
@@ -24,7 +26,9 @@ function Calendar() {
             <span className="flex items-center gap-1"><span className="w-3 h-3 bg-gray-700 rounded-sm inline-block"></span> Cancelled</span>
           </div>
         </div>
+        <div className="pb-20"></div>
       </div>
+      <Navbar />
     </div>
   )
 }

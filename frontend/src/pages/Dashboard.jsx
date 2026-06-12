@@ -1,3 +1,5 @@
+import Navbar from '../components/Navbar'
+
 function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-950 text-white px-4 py-6">
@@ -31,7 +33,10 @@ function Dashboard() {
             <p className="text-gray-400 text-sm">Danger zone</p>
           </div>
         </div>
+
+        <div className="pb-20"></div>
       </div>
+      <Navbar />
     </div>
   )
 }
