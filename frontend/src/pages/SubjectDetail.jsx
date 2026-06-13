@@ -1,3 +1,5 @@
+import Navbar from '../components/Navbar'
+
 function SubjectDetail() {
   return (
     <div className="min-h-screen bg-gray-950 text-white px-4 py-6">
@@ -28,7 +30,10 @@ function SubjectDetail() {
             </div>
           </div>
         </div>
+
+        <div className="pb-20"></div>
       </div>
+      <Navbar />
     </div>
   )
 }

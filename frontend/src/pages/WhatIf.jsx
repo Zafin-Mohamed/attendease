@@ -1,3 +1,5 @@
+import Navbar from '../components/Navbar'
+
 function WhatIf() {
   return (
     <div className="min-h-screen bg-gray-950 text-white px-4 py-6">
@@ -31,7 +33,10 @@ function WhatIf() {
           <p className="text-4xl font-bold text-yellow-400">74.2%</p>
           <p className="text-gray-400 mt-2">Warning — you will drop below 75% if you miss 3 more classes.</p>
         </div>
+
+        <div className="pb-20"></div>
       </div>
+      <Navbar />
     </div>
   )
 }

@@ -1,3 +1,5 @@
+import Navbar from '../components/Navbar'
+
 function TimetableSetup() {
   return (
     <div className="min-h-screen bg-gray-950 text-white px-4 py-6">
@@ -5,7 +7,6 @@ function TimetableSetup() {
         <h1 className="text-3xl font-bold text-purple-400 mb-2">Setup Timetable</h1>
         <p className="text-gray-400 mb-6">Add your subjects and assign them to weekdays. You only do this once.</p>
 
-        {/* Add subject */}
         <div className="bg-gray-900 rounded-xl p-6 mb-6">
           <h2 className="text-lg font-semibold text-white mb-4">Add a Subject</h2>
           <div className="flex gap-3">
@@ -20,7 +21,6 @@ function TimetableSetup() {
           </div>
         </div>
 
-        {/* Assign to days */}
         <div className="bg-gray-900 rounded-xl p-6">
           <h2 className="text-lg font-semibold text-white mb-4">Assign Subjects to Days</h2>
           <div className="flex flex-col gap-4">
@@ -33,7 +33,9 @@ function TimetableSetup() {
           </div>
         </div>
 
+        <div className="pb-20"></div>
       </div>
+      <Navbar />
     </div>
   )
 }
