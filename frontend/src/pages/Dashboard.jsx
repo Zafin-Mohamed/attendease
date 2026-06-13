@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 
-function Dashboard() {
+function Dashboard({ subjects }) {
   const navigate = useNavigate()
 
   return (
@@ -24,23 +24,26 @@ function Dashboard() {
         </div>
 
         <h2 className="text-lg font-semibold text-white mb-3">Your Subjects</h2>
-        <div className="flex flex-col gap-4">
-          <div className="bg-gray-900 rounded-xl p-4 border-l-4 border-green-500">
-            <p className="text-white font-semibold">DBMS</p>
-            <p className="text-green-400 font-bold text-xl">88%</p>
-            <p className="text-gray-400 text-sm">Safe zone</p>
+
+        {subjects.length === 0 ? (
+          <div className="bg-gray-900 rounded-xl p-6 text-center">
+            <p className="text-gray-400 mb-3">You haven't added any subjects yet.</p>
+            <button
+              onClick={() => navigate('/timetable-setup')}
+              className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-semibold">
+              Setup Timetable
+            </button>
           </div>
-          <div className="bg-gray-900 rounded-xl p-4 border-l-4 border-yellow-500">
-            <p className="text-white font-semibold">Java</p>
-            <p className="text-yellow-400 font-bold text-xl">77%</p>
-            <p className="text-gray-400 text-sm">Warning zone</p>
+        ) : (
+          <div className="flex flex-col gap-4">
+            {subjects.map((subject) => (
+              <div key={subject.id} className="bg-gray-900 rounded-xl p-4 border-l-4 border-gray-600">
+                <p className="text-white font-semibold capitalize">{subject.name}</p>
+                <p className="text-gray-400 text-sm">No attendance marked yet</p>
+              </div>
+            ))}
           </div>
-          <div className="bg-gray-900 rounded-xl p-4 border-l-4 border-red-500">
-            <p className="text-white font-semibold">Unix</p>
-            <p className="text-red-400 font-bold text-xl">68%</p>
-            <p className="text-gray-400 text-sm">Danger zone</p>
-          </div>
-        </div>
+        )}
 
         <div className="pb-20"></div>
       </div>

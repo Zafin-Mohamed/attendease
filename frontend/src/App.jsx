@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Landing from './pages/Landing'
 import Register from './pages/Register'
@@ -11,15 +12,17 @@ import Calendar from './pages/Calendar'
 import Settings from './pages/Settings'
 
 function App() {
+  const [subjects, setSubjects] = useState([])
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard subjects={subjects} />} />
         <Route path="/mark-attendance" element={<MarkAttendance />} />
-        <Route path="/timetable-setup" element={<TimetableSetup />} />
+        <Route path="/timetable-setup" element={<TimetableSetup subjects={subjects} setSubjects={setSubjects} />} />
         <Route path="/subject/:id" element={<SubjectDetail />} />
         <Route path="/what-if" element={<WhatIf />} />
         <Route path="/calendar" element={<Calendar />} />

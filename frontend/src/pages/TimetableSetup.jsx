@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import Navbar from '../components/Navbar'
 
-function TimetableSetup() {
+function TimetableSetup({ subjects, setSubjects }) {
   const [subjectName, setSubjectName] = useState('')
-  const [subjects, setSubjects] = useState([])
 
   function handleAddSubject() {
     if (subjectName.trim() === '') return
