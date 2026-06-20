@@ -52,7 +52,10 @@ function Dashboard({ subjects, attendanceRecords }) {
             Edit Timetable
           </button>
         </div>
-        <p className="text-gray-400 mb-6">Today is {todayName}</p>
+        <p className="text-gray-400 mb-1">Today is {todayName}</p>
+<p className="text-gray-600 text-xs mb-6">
+  {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+</p>
 
         {/* Today's Classes */}
         <h2 className="text-lg font-semibold text-white mb-3">Today's Classes</h2>

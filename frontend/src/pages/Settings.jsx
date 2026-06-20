@@ -39,7 +39,7 @@ function Settings({ subjects, attendanceRecords }) {
             Logout
           </button>
         </div>
-
+<p className="text-center text-gray-700 text-xs mt-6">AttendEase v1.0 • Made for students</p>
         <div className="pb-20"></div>
       </div>
       <Navbar />

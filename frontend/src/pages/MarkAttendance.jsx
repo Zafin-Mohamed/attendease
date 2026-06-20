@@ -97,7 +97,10 @@ function MarkAttendance({ subjects, attendanceRecords, setAttendanceRecords }) {
             })}
           </div>
         )}
-
+<div className="bg-gray-900 rounded-xl p-4 mt-4 text-center">
+  <p className="text-gray-400 text-sm">Tap Present, Absent, or Cancelled for each class.</p>
+  <p className="text-gray-600 text-xs mt-1">You can change your selection anytime today.</p>
+</div>
         <div className="pb-20"></div>
       </div>
       <Navbar />
