@@ -34,7 +34,7 @@ function App() {
         />
         <Route path="/timetable-setup" element={<TimetableSetup subjects={subjects} setSubjects={setSubjects} />} />
         <Route path="/subject/:id" element={<SubjectDetail subjects={subjects} attendanceRecords={attendanceRecords} />} />
-        <Route path="/what-if" element={<WhatIf />} />
+        <Route path="/what-if" element={<WhatIf subjects={subjects} attendanceRecords={attendanceRecords} />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>

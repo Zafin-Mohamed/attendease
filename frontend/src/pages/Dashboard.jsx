@@ -115,7 +115,11 @@ function Dashboard({ subjects, attendanceRecords }) {
             </div>
           </>
         )}
-
+<button
+  onClick={() => navigate('/what-if')}
+  className="w-full mt-4 bg-gray-900 hover:bg-gray-800 text-purple-400 py-3 rounded-xl font-semibold border border-gray-800">
+  What If Simulator →
+</button>
         <div className="pb-20"></div>
       </div>
       <Navbar />
