@@ -92,9 +92,10 @@ function Dashboard({ subjects, attendanceRecords }) {
 
                 return (
                   <div
-                    key={subject.id}
-                    className={`bg-gray-900 rounded-xl p-4 border-l-4 ${zoneColors[zone]}`}
-                  >
+  key={subject.id}
+  onClick={() => navigate(`/subject/${subject.id}`)}
+  className={`bg-gray-900 rounded-xl p-4 border-l-4 ${zoneColors[zone]} cursor-pointer hover:bg-gray-800`}
+>
                     <div className="flex justify-between items-start">
                       <p className="text-white font-semibold capitalize">{subject.name}</p>
                       <span className={`font-bold text-xl ${zoneTextColors[zone]}`}>
