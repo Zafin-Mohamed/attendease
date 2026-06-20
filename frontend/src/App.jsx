@@ -13,6 +13,7 @@ import Settings from './pages/Settings'
 
 function App() {
   const [subjects, setSubjects] = useState([])
+  const [attendanceRecords, setAttendanceRecords] = useState([])
 
   return (
     <BrowserRouter>
@@ -21,7 +22,16 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard subjects={subjects} />} />
-        <Route path="/mark-attendance" element={<MarkAttendance />} />
+        <Route
+          path="/mark-attendance"
+          element={
+            <MarkAttendance
+              subjects={subjects}
+              attendanceRecords={attendanceRecords}
+              setAttendanceRecords={setAttendanceRecords}
+            />
+          }
+        />
         <Route path="/timetable-setup" element={<TimetableSetup subjects={subjects} setSubjects={setSubjects} />} />
         <Route path="/subject/:id" element={<SubjectDetail />} />
         <Route path="/what-if" element={<WhatIf />} />
