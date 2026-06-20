@@ -1,0 +1,18 @@
+{
+  "name": "AttendEase",
+  "short_name": "AttendEase",
+  "description": "Track your college attendance smartly. Never miss the 75% mark.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030712",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
