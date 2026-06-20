@@ -1,24 +1,45 @@
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
+import { getAttendancePercent, getZone, getSafeToMiss, getClassesToRecover } from '../utils/calculations'
 
 const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-function Dashboard({ subjects }) {
+function Dashboard({ subjects, attendanceRecords }) {
   const navigate = useNavigate()
 
   const today = new Date()
   const todayName = DAY_NAMES[today.getDay()]
 
   const hour = today.getHours()
-
-let greeting = 'Good Morning!'
-if (hour >= 12 && hour < 17) {
-  greeting = 'Good Afternoon!'
-} else if (hour >= 17) {
-  greeting = 'Good Evening!'
-}
+  let greeting = 'Good Morning!'
+  if (hour >= 12 && hour < 17) {
+    greeting = 'Good Afternoon!'
+  } else if (hour >= 17) {
+    greeting = 'Good Evening!'
+  }
 
   const todaysSubjects = subjects.filter((subject) => subject.days.includes(todayName))
+
+  const zoneColors = {
+    green: 'border-green-500',
+    yellow: 'border-yellow-500',
+    red: 'border-red-500',
+    none: 'border-gray-600',
+  }
+
+  const zoneTextColors = {
+    green: 'text-green-400',
+    yellow: 'text-yellow-400',
+    red: 'text-red-400',
+    none: 'text-gray-400',
+  }
+
+  const zoneLabels = {
+    green: 'Safe zone',
+    yellow: 'Warning zone',
+    red: 'Danger zone',
+    none: 'No data yet',
+  }
 
   return (
     <div className="min-h-screen bg-gray-950 text-white px-4 py-6">
@@ -33,16 +54,10 @@ if (hour >= 12 && hour < 17) {
         </div>
         <p className="text-gray-400 mb-6">Today is {todayName}</p>
 
-        <div className="bg-gray-900 rounded-xl p-6 mb-6">
-          <h2 className="text-lg font-semibold text-white mb-1">Overall Attendance</h2>
-          <p className="text-5xl font-bold text-green-400">85%</p>
-          <p className="text-gray-400 text-sm mt-1">You are in the safe zone</p>
-        </div>
-
+        {/* Today's Classes */}
         <h2 className="text-lg font-semibold text-white mb-3">Today's Classes</h2>
-
         {subjects.length === 0 ? (
-          <div className="bg-gray-900 rounded-xl p-6 text-center">
+          <div className="bg-gray-900 rounded-xl p-6 text-center mb-6">
             <p className="text-gray-400 mb-3">You haven't added any subjects yet.</p>
             <button
               onClick={() => navigate('/timetable-setup')}
@@ -51,18 +66,53 @@ if (hour >= 12 && hour < 17) {
             </button>
           </div>
         ) : todaysSubjects.length === 0 ? (
-          <div className="bg-gray-900 rounded-xl p-6 text-center">
-            <p className="text-gray-400">No classes scheduled for today. Enjoy your day off!</p>
+          <div className="bg-gray-900 rounded-xl p-6 text-center mb-6">
+            <p className="text-gray-400">No classes today. Enjoy your day off!</p>
           </div>
         ) : (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3 mb-6">
             {todaysSubjects.map((subject) => (
-              <div key={subject.id} className="bg-gray-900 rounded-xl p-4 border-l-4 border-gray-600">
+              <div key={subject.id} className="bg-gray-900 rounded-xl p-4 border-l-4 border-purple-500">
                 <p className="text-white font-semibold capitalize">{subject.name}</p>
-                <p className="text-gray-400 text-sm">No attendance marked yet</p>
               </div>
             ))}
           </div>
+        )}
+
+        {/* All Subjects with Attendance */}
+        {subjects.length > 0 && (
+          <>
+            <h2 className="text-lg font-semibold text-white mb-3">All Subjects</h2>
+            <div className="flex flex-col gap-4">
+              {subjects.map((subject) => {
+                const percent = getAttendancePercent(subject.id, attendanceRecords)
+                const zone = getZone(percent)
+                const safeToMiss = getSafeToMiss(subject.id, attendanceRecords)
+                const toRecover = getClassesToRecover(subject.id, attendanceRecords)
+
+                return (
+                  <div
+                    key={subject.id}
+                    className={`bg-gray-900 rounded-xl p-4 border-l-4 ${zoneColors[zone]}`}
+                  >
+                    <div className="flex justify-between items-start">
+                      <p className="text-white font-semibold capitalize">{subject.name}</p>
+                      <span className={`font-bold text-xl ${zoneTextColors[zone]}`}>
+                        {percent !== null ? `${percent}%` : '--'}
+                      </span>
+                    </div>
+                    <p className={`text-sm mt-1 ${zoneTextColors[zone]}`}>{zoneLabels[zone]}</p>
+                    {percent !== null && zone !== 'red' && safeToMiss > 0 && (
+                      <p className="text-gray-400 text-xs mt-1">Can miss {safeToMiss} more class{safeToMiss !== 1 ? 'es' : ''}</p>
+                    )}
+                    {percent !== null && zone === 'red' && (
+                      <p className="text-red-400 text-xs mt-1">Attend {toRecover} more class{toRecover !== 1 ? 'es' : ''} to recover</p>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </>
         )}
 
         <div className="pb-20"></div>
